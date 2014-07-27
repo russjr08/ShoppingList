@@ -1,0 +1,62 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>You requested...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="{% static "css/flat-ui.css" %}" rel="stylesheet">
+
+    <link href="{% static "style.css" %}" rel="stylesheet">
+
+
+    <!-- <link rel="shortcut icon" href="images/favicon.ico"> -->
+
+  </head>
+  <body >
+    <div class="container">
+        <h1 style="text-align: center;">Requested Item: {{ item.item_name }}</h1>
+
+        <br/>
+        <br/>
+
+
+        <h3>Item details:</h3>
+
+        <br/>
+
+        <p>Name: {{ item.item_name }}</p>
+        <p>Who added this item: {{ item.item_author }}</p>
+        <p>Where can this item be found: {{ item.item_store }}</p>
+        <p>Already purchased? {{ item.item_purchased }}</p>
+        <p>Item is a priority? {{ item.item_is_priority }}</p>
+        <p>When was this added? {{ item.item_date_added }}</p>
+
+        <br/>
+        <br/>
+        <a style="font-size: 12px" href="{% url 'index' %}" ><--- Return home</a>
+
+
+    </div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+    <script src="{% static "js/jquery-1.8.3.min.js" %}"></script>
+    <script src="{% static "js/jquery-ui-1.10.3.custom.min.js" %}"></script>
+    <script src="{% static "js/jquery.ui.touch-punch.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/bootstrap-select.js" %}"></script>
+    <script src="{% static "js/bootstrap-switch.js" %}"></script>
+    <script src="{% static "js/flatui-checkbox.js" %}"></script>
+    <script src="{% static "js/flatui-radio.js" %}"></script>
+    <script src="{% static "js/jquery.tagsinput.js" %}"></script>
+    <script src="{% static "js/jquery.placeholder.js" %}"></script>
+  </body>
+</html>
