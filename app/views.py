@@ -1,9 +1,10 @@
 import json
 import datetime
 from django.core import serializers
+from django.core.urlresolvers import reverse
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
@@ -19,7 +20,7 @@ class IndexView(generic.ListView):
     context_object_name = 'available_items'
 
     def get_queryset(self):
-        return Item.objects.all()
+        return Item.objects.all().order_by('item_category')
 
 
 def detail(request, item_id):
@@ -43,10 +44,14 @@ def add_item(request):
     i.item_name = request.POST['name']
     i.item_author = request.POST['author']
     i.item_store = request.POST['store']
-    if request.POST['priority']:
-        i.item_is_priority = True
-    else:
+
+    if request.POST.get('priority', 'false') == 'true' or request.POST.get('priority', 'false') == 'yes':
+            i.item_is_priority = True
+    elif request.POST.get('priority', 'false') == 'false' or request.POST.get('priority', 'false') == 'no'\
+            or request.POST.get('priority', 'false') is None:
         i.item_is_priority = False
+
+    i.item_category = request.POST['category']
 
     i.item_purchased = False
     i.item_date_added = datetime.datetime.today()
@@ -55,7 +60,7 @@ def add_item(request):
 
     print("Request processed.")
 
-    return render(request, 'app/index.html')
+    return HttpResponseRedirect(reverse('index'))
 
 
 # API Requests
@@ -107,6 +112,8 @@ def api_add_new_item(request):
                 or request.POST.get('priority', 'false') is None:
             i.item_is_priority = False
 
+        i.item_category = request.POST['category']
+
         i.item_purchased = False
         i.item_date_added = datetime.datetime.today()
 
@@ -126,3 +133,13 @@ def api_delete_item(request, item_id):
     json_data = serializers.serialize('json', Item.objects.filter(pk=item_id))
     Item.objects.filter(pk=item_id).delete()
     return HttpResponse(json_data, content_type="application/json")
+
+
+def api_get_categories(request):
+    categories = []
+    items = Item.objects.all()
+    for item in items:
+        if not categories.__contains__(item.item_category):
+            categories.append(item.item_category)
+
+    return HttpResponse(json.dumps({'categories' : categories}), content_type="application/json")

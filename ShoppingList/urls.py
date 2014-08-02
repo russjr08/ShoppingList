@@ -19,5 +19,6 @@ urlpatterns = patterns('',
     url(r'^api/items/(?P<item_id>\d+)/$', 'app.views.api_get_single_item'),
     url(r'^api/items/new/$', 'app.views.api_add_new_item'),
     url(r'^api/items/delete/(?P<item_id>\d+)/$', 'app.views.api_delete_item'),
+    url(r'^api/items/categories/$', 'app.views.api_get_categories'),
     url(r'^admin/', include(admin.site.urls)),
 )

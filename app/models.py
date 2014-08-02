@@ -16,6 +16,8 @@ class Item(models.Model):
 
     item_date_added = models.DateTimeField("Requested At", default=datetime.datetime.today())
 
+    item_category = models.CharField("Category", max_length=20)
+
     def item_should_be_listed(self):
         if self.item_date_added >= datetime.datetime.today():
             return True

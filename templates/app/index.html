@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load item_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +34,12 @@
 
           <ul>
         {% for item in available_items %}
-          <li><a style="color: #34495e" href="{% url 'detail' item.id %}">{{ item.item_name }}</a></li>
+          {% if item|is_priority %}
+                <li><a style="color: red" href="{% url 'detail' item.id %}">{% if item|is_purchased %}<del>{% endif %}{{ item.item_name }} - {{ item.item_category }} - <i>{{ item.item_author }}</i>{% if item|is_purchased %}</del>{% endif %}</a></li>
+              {% else %}
+                <li><a style="color: #34495e" href="{% url 'detail' item.id %}">{% if item|is_purchased %}<del>{% endif %}{{ item.item_name }} - {{ item.item_category }} - <i>{{ item.item_author }}</i>{% if item|is_purchased %}</del>{% endif %}</a></li>
+          {% endif %}
+{#          <li><a style="color: #34495e" href="{% url 'detail' item.id %}">{{ item.item_name }} - {{ item.item_category }} - <i>{{ item.item_author }}</i></a></li>#}
         {% endfor %}
           </ul>
         {% else %}
