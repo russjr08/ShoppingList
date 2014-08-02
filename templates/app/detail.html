@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load item_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,14 +31,26 @@
         <h3>Item details:</h3>
 
         <br/>
-
+        <form name="modify" action="">
         <p>Name: {{ item.item_name }}</p>
         <p>Who added this item: {{ item.item_author }}</p>
         <p>Where can this item be found: {{ item.item_store }}</p>
-        <p>Already purchased? {{ item.item_purchased }}</p>
-        <p>Item is a priority? {{ item.item_is_priority }}</p>
+        <p>Already purchased? <input type="checkbox" id="purchased" {% if item|is_purchased %} checked {% endif %}/> </p>
+        <p>Item is a priority? <input type="checkbox" id="priority" {% if item|is_priority %} checked {% endif %} /> </p>
         <p>When was this added? {{ item.item_date_added }}</p>
+        </form>
 
+        <script type="application/javascript">
+            function submit(){
+                var req = new XMLHttpRequest();
+                req.open("POST","{% url 'api_modify_item' item.id %}", false);
+                req.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+                req.send("priority=" + document.getElementById('priority').checked + "&purchased=" + document.getElementById('purchased').checked);
+                window.location = "{% url 'index' %}"
+            }
+        </script>
+        <button onclick="submit()">Submit Change</button>
         <br/>
         <br/>
         <a style="font-size: 12px" href="{% url 'index' %}" ><--- Return home</a>

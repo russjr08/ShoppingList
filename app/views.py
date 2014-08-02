@@ -144,3 +144,24 @@ def api_get_categories(request):
             categories.append(item.item_category)
 
     return HttpResponse(json.dumps({'categories' : categories}), content_type="application/json")
+
+# /api/items/modify/:id/
+@csrf_exempt
+def api_modify_item(request, item_id):
+    item = Item.objects.get(pk=item_id)
+
+    if request.POST.get('purchased', 'false') == 'true':
+        item.item_purchased = True
+    elif request.POST.get('purchased', 'false') == 'false':
+        item.item_purchased = False
+
+    if request.POST.get('priority', 'false') == 'true':
+        item.item_is_priority = True
+    elif request.POST.get('priority', 'false') == 'false':
+        item.item_is_priority = False
+
+    item.save()
+
+    return HttpResponse(serializers.serialize('json', Item.objects.filter(pk=item_id)), content_type="application/json")
+
+
