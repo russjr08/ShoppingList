@@ -135,9 +135,10 @@ def api_delete_item(request, item_id):
     return HttpResponse(json_data, content_type="application/json")
 
 
+# /api/items/categories/
 def api_get_categories(request):
     categories = []
-    items = Item.objects.all()
+    items = Item.objects.all().order_by('item_category')
     for item in items:
         if not categories.__contains__(item.item_category):
             categories.append(item.item_category)
