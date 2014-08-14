@@ -45,7 +45,7 @@ def add_item(request):
     i.item_author = request.POST['author']
     i.item_store = request.POST['store']
 
-    if request.POST.get('priority', 'false') == 'true' or request.POST.get('priority', 'false') == 'yes':
+    if request.POST.get('priority', 'false') == 'true' or request.POST.get('priority', 'false') == 'yes' or request.POST.get('priority', 'false') == 'on':
             i.item_is_priority = True
     elif request.POST.get('priority', 'false') == 'false' or request.POST.get('priority', 'false') == 'no'\
             or request.POST.get('priority', 'false') is None:
