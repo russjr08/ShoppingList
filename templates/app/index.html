@@ -38,9 +38,9 @@
           <ul>
         {% for item in available_items %}
           {% if item|is_priority %}
-                <li><a style="color: red" href="{% url 'detail' item.id %}">{% if item|is_purchased %}<del>{% endif %}{{ item.item_name }} - {{ item.item_category }} - <i>{{ item.item_author }}</i>{% if item|is_purchased %}</del>{% endif %}</a></li>
+                <li><a style="color: red" href="{% url 'detail' item.id %}">{% if item|is_purchased %}<span class="fui-checkbox-checked">&nbsp;&nbsp;</span>{% endif %}{{ item.item_name }} - {{ item.item_category }} - <i>{{ item.item_author }}</i></a></li>
               {% else %}
-                <li><a style="color: #34495e" href="{% url 'detail' item.id %}">{% if item|is_purchased %}<del>{% endif %}{{ item.item_name }} - {{ item.item_category }} - <i>{{ item.item_author }}</i>{% if item|is_purchased %}</del>{% endif %}</a></li>
+                <li><a style="color: #34495e" href="{% url 'detail' item.id %}">{% if item|is_purchased %}<span class="fui-checkbox-checked">&nbsp;&nbsp;</span>{% endif %}{{ item.item_name }} - {{ item.item_category }} - <i>{{ item.item_author }}</i></a></li>
           {% endif %}
 {#          <li><a style="color: #34495e" href="{% url 'detail' item.id %}">{{ item.item_name }} - {{ item.item_category }} - <i>{{ item.item_author }}</i></a></li>#}
         {% endfor %}
