@@ -26,34 +26,32 @@
         <br/>
         <br/>
 
-        <form action="{% url 'add' %}" method="post">
+        <form action="{% url 'add' %}" method="post" role="form">
             {% csrf_token %}
-            <table>
-                <tr>
-                    <td>Item's Name:</td>
-                    <td><input type="text" name="name"/></td>
-                </tr>
-                <br/>
-                <tr>
-                    <td>Whose requesting this:</td>
-                    <td><input type="text" name="author"/></td>
-                </tr>
-                <tr>
-                    <td>Where can this item be found:</td>
-                    <td><input type="text" name="store"/></td>
-                </tr>
-                <tr>
-                    <td>Category of this item:</td>
-                    <td><input type="text" name="category" /></td>
-                </tr>
-                <tr>
-                    <td>Is this item a priority: <i>Please use this sparingly...</i></td>
-                    <td><input type="checkbox" name="priority"/></td>
-                </tr>
-            </table>
-            <p>Okay, I have all the details. If you're sure these are correct...</p> <br/>
+            <div class="form-group">
+                <label for="name">Item Name:</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter Item Name" />
+            </div>
+            <div class="form-group">
+                <label for="name">Whose requesting this:</label>
+                <input type="text" class="form-control" name="author" placeholder="Requested By...?" />
+            </div>
+            <div class="form-group">
+                <label for="name">Where can this item be found:</label>
+                <input type="text" class="form-control" name="store" placeholder="Enter Store Name" />
+            </div>
+            <div class="form-group">
+                <label for="name">Category of this item:</label>
+                <input type="text" class="form-control" name="category" placeholder="Enter A Category" />
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="priority" data-toggle="checkbox"> Is this item a priority? <i>Please use this sparingly...</i>
+                </label>
+            </div>
+            <p>Okay, I have all the details. If you're sure these are correct...</p>
 
-            <input type="submit" value="Add!" />
+            <button type="submit" class="btn btn-success">Create Item!</button>
 
         </form>
 
