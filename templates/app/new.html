@@ -28,14 +28,29 @@
 
         <form action="{% url 'add' %}" method="post">
             {% csrf_token %}
-            Item's Name: <input type="text" name="name"/> <br/>
-            Whose requesting this: <input type="text" name="author"/> <br/>
-            Where can this item be found: <input type="text" name="store"/> <br/>
-            Category of this item: <input type="text" name="category" /> <br/>
-            Is this item a priority: <i>Please use this sparingly...</i> <input type="checkbox" name="priority"/> <br/>
-
-            <br/>
-
+            <table>
+                <tr>
+                    <td>Item's Name:</td>
+                    <td><input type="text" name="name"/></td>
+                </tr>
+                <br/>
+                <tr>
+                    <td>Whose requesting this:</td>
+                    <td><input type="text" name="author"/></td>
+                </tr>
+                <tr>
+                    <td>Where can this item be found:</td>
+                    <td><input type="text" name="store"/></td>
+                </tr>
+                <tr>
+                    <td>Category of this item:</td>
+                    <td><input type="text" name="category" /></td>
+                </tr>
+                <tr>
+                    <td>Is this item a priority: <i>Please use this sparingly...</i></td>
+                    <td><input type="checkbox" name="priority"/></td>
+                </tr>
+            </table>
             <p>Okay, I have all the details. If you're sure these are correct...</p> <br/>
 
             <input type="submit" value="Add!" />
