@@ -14,7 +14,7 @@ class Item(models.Model):
     item_purchased = models.BooleanField("Item already purchased?", default=False)
     item_is_priority = models.BooleanField("Item is Urgent?", default=False)
 
-    item_date_added = models.DateTimeField("Requested At", default=datetime.datetime.today())
+    item_date_added = models.DateTimeField("Requested At", default=datetime.datetime.now)
 
     item_category = models.CharField("Category", max_length=20)
 

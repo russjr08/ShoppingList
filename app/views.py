@@ -1,5 +1,7 @@
 import json
 import datetime
+from django.utils import timezone
+from dateutil.tz import tzlocal
 from django.core import serializers
 from django.core.urlresolvers import reverse
 
@@ -54,7 +56,8 @@ def add_item(request):
     i.item_category = request.POST['category']
 
     i.item_purchased = False
-    i.item_date_added = datetime.datetime.today()
+    i.item_date_added = timezone.now()
+
 
     i.save()
 
