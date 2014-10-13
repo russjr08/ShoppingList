@@ -23,13 +23,15 @@
   <body >
     <div class="container">
         <h1 style="text-align: center;">Shopping List</h1>
-
+        {% if announcement %}
+        <h3>Announcements...</h3>
+        <p>{{ announcement }}
         <br/>
         <br/>
+        {% endif %}
         <script type="text/javascript" src="http://www.datejs.com/build/date.js"></script>
 
         <script type="text/javascript">document.write("Last Refreshed: " + new Date().toString("hh:mm tt")) </script>
-        <br/>
         <br/>
 
         <p>These are the items currently on the list...<p>

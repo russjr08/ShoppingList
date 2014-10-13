@@ -1,7 +1,7 @@
 import json
 import datetime
+import os
 from django.utils import timezone
-from dateutil.tz import tzlocal
 from django.core import serializers
 from django.core.urlresolvers import reverse
 
@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 from app.models import Item
-
+from ShoppingList.settings import BASE_DIR
 
 # Static pages
 
@@ -24,6 +24,17 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Item.objects.all().order_by('item_category')
 
+def BetaIndexView(request):
+    if os.path.isfile(os.path.join(BASE_DIR, 'announce.txt')):
+
+        return render(request, 'app/index.html', {
+            'available_items': Item.objects.order_by('item_category'),
+            'announcement': open(os.path.join(BASE_DIR, 'announce.txt'), 'r').read().rstrip()
+        })
+    else:
+        return render(request, 'app/index.html', {
+            'available_items': Item.objects.order_by('item_category')
+        })
 
 def detail(request, item_id):
     i = get_object_or_404(Item, pk=item_id)

@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'ShoppingList.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^$', 'app.views.BetaIndexView', name='index'),
     url(r'^new/', 'app.views.new_item', name='new'),
     url(r'^detail/items/(?P<item_id>\d+)/$', 'app.views.detail', name='detail'),
     url(r'^items/add/', 'app.views.add_item', name='add'),
