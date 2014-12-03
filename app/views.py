@@ -116,9 +116,9 @@ def api_add_new_item(request):
             return HttpResponse("Invalid request (You're missing a required field)", content_type="text/plain")
 
         i = Item()
-        i.item_name = request.POST['name']
-        i.item_author = request.POST['author']
-        i.item_store = request.POST['store']
+        i.item_name = request.POST.get('name', '')
+        i.item_author = request.POST.get('author', '')
+        i.item_store = request.POST.get('store', '')
 
         if request.POST.get('priority', 'false') == 'true' or request.POST.get('priority', 'false') == 'yes':
             i.item_is_priority = True
