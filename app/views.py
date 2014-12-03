@@ -126,7 +126,7 @@ def api_add_new_item(request):
                 or request.POST.get('priority', 'false') is None:
             i.item_is_priority = False
 
-        i.item_category = request.POST['category']
+        i.item_category = request.POST.get('category', '')
 
         i.item_purchased = False
         i.item_date_added = datetime.datetime.today()
