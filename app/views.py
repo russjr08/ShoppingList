@@ -112,7 +112,7 @@ If an error is encountered, it will be returned and the request will not be proc
 @csrf_exempt
 def api_add_new_item(request):
     if request.POST:
-        if request.POST['name'] is None or request.POST['author'] is None or request.POST['store'] is None:
+        if request.POST.get('name', None) is None:
             return HttpResponse("Invalid request (You're missing a required field)", content_type="text/plain")
 
         i = Item()
