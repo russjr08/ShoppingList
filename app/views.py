@@ -133,8 +133,7 @@ def api_add_new_item(request):
 
         i.save()
 
-        print("API request (/api/items/new/) successfully processed. Handing off to api_get_single_item()")
-        return api_get_single_item(request, i.pk)
+        return api_get_single_item(request=request, item_id=i.pk)
 
     else:
         return HttpResponse("Invalid request (Missing POST data)", content_type="text/plain")
