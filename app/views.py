@@ -133,7 +133,8 @@ def api_add_new_item(request):
 
         i.save()
 
-        return api_get_single_item(request=request, item_id=i.pk)
+        return HttpResponse(serializers.serialize('json', Item.objects.filter(pk=i.pk)),
+                            content_type="application/json", status=200)
 
     else:
         return HttpResponse("Invalid request (Missing POST data)", content_type="text/plain")
